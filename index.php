@@ -49,7 +49,7 @@
       </div>
 
       <div class="col-md border mx-1 p-2">
-        <form action="" method="post">
+        <form action="crud.php" method="post">
           <fieldset>
             <legend><b>U</b>pdate user</legend>
             <div class="form-group">
@@ -65,18 +65,18 @@
               <input type="number" class="form-control" name="age" id="age" placeholder="age">
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="submit" name="update" class="btn btn-primary">Update</button>
             </div>
           </fieldset>
         </form>
       </div>
 
       <div class="col-md border mx-1 p-2">
-        <form action="" method="post">
+        <form action="crud.php" method="post">
           <fieldset>
             <legend><b>D</b>elete user</legend>
             <div class="form-group">
-              <label for="id">iId</label>
+              <label for="id">Id</label>
               <input type="number" class="form-control" name="id" id="id" placeholder="id">
             </div>
             <div class="form-group">
@@ -84,14 +84,19 @@
               <input type="text" class="form-control" name="username" id="username" placeholder="username">
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-primary">Delete</button>
+              <label for="age">Age</label>
+              <input type="number" class="form-control" name="age" id="age" placeholder="age">
+            </div>
+            <div class="form-group">
+              <button type="submit" name="delete" class="btn btn-danger">Delete</button>
             </div>
           </fieldset>
         </form>
       </div>
     </div>
-    <div class="row">
 
+    <!-- TODO: Use jQuery/AJAX to pull this from client side and display -->
+    <div class="row d-none">
       <div class="col-md border m-1 p-2">
         <form action="" method="post">
           <fieldset>
@@ -102,8 +107,42 @@
           </fieldset>
         </form>
       </div>
-
     </div>
+
+    <div class="row justify-content-center">
+    <div class="col-md m-1 p-2">
+    <h2 class="text-center"><b>R</b>ead users</h2>
+      <table class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+        <th>id</th>
+        <th>username</th>
+        <th>age</th>
+        </tr>
+        </thead>
+        <?php
+        // TODO: Replace this with jQuery/AJAX later...
+        $mysqli = new mysqli($host, $dbUsername, $dbPassword, $dbName) or die(mysqli_error($mysqli));
+        $result = $mysqli->query("SELECT * FROM $tableName");
+        ?>
+        <?php
+          while($row = $result->fetch_assoc()) {
+            ?>
+            <tr>
+            <td><?php echo $row['id'] ?></td>
+            <td><?php echo $row['username'] ?></td>
+            <td><?php echo $row['age'] ?></td>
+            </tr>
+            <?php
+          }
+        ?>
+
+      </table>
+      </div>
+    </div>
+
+
+  </div>
 
 
 
