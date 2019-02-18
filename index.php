@@ -122,11 +122,14 @@
         </thead>
         <?php
         // TODO: Replace this with jQuery/AJAX later...
-        $mysqli = new mysqli($host, $dbUsername, $dbPassword, $dbName) or die(mysqli_error($mysqli));
-        $result = $mysqli->query("SELECT * FROM $tableName");
+        // Connect
+        $db = new SQLite3('db.sqlite', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+        $results = $db->query("SELECT * FROM $tableName");
+
         ?>
         <?php
-          while($row = $result->fetch_assoc()) {
+        
+          while($row = $results->fetchArray(SQLITE3_ASSOC)) {
             ?>
             <tr>
             <td><?php echo $row['id'] ?></td>
@@ -135,6 +138,8 @@
             </tr>
             <?php
           }
+
+          
         ?>
 
       </table>
