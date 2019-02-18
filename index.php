@@ -17,7 +17,7 @@
     <h1 class="text-center">CRUD example in PHP</h1>
 
     <pre class="text-center"><code>
-      db: crud_php
+      db: db.sqlite
       tables: 
         users: id, username, age
     </code></pre>
@@ -54,7 +54,7 @@
             <legend><b>U</b>pdate user</legend>
             <div class="form-group">
               <label for="id">Id</label>
-              <input type="number" class="form-control" name="id" id="id" placeholder="id">
+              <input type="number" class="form-control" name="id" id="id" placeholder="id" required>
             </div>
             <div class="form-group">
               <label for="username">Username</label>

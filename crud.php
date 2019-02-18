@@ -1,8 +1,5 @@
 <?php
 
-$host = "localhost";
-$dbUsername = "root";
-$dbPassword = "";
 $dbPath = "db.sqlite";
 $tableName = "users";
 
@@ -30,10 +27,6 @@ if (isset($_POST['create'])) {
     $db->query("INSERT INTO '$tableName' (id, username, age) VALUES ('$id', '$username', '$age')");
   }
 
-  // echo "id: " . $id . ", type: " . gettype($id) . "<br>";
-  // echo "username: " . $username . ", type: " . gettype($username) . "<br>";
-  // echo "age: " . $age . ", type: " . gettype($age) . "<br>";
-  // echo "post id: " . $_POST['id'] . ", type: " . gettype($_POST['id']) . "<br>";
   header("Location: index.php");
 }
 
@@ -45,6 +38,24 @@ if (isset($_POST['delete'])) {
   $age = (int) $_POST['age'];
 
   $db->query("DELETE FROM $tableName WHERE id='$id' OR username='$username' OR age='$age'");
+  
+  header("Location: index.php");
+}
+
+// Update
+if (isset($_POST['update'])) {
+
+  $id = (int) $_POST['id'];
+  $username = $_POST['username'];
+  $age = (int) $_POST['age'];
+
+  if ($_POST['username'] == '') {
+    $db->query("UPDATE $tableName SET age = '$age' WHERE id='$id';");
+  } else if ($_POST['age'] == '') {
+    $db->query("UPDATE $tableName SET username = '$username' WHERE id='$id';");
+  } else {
+    $db->query("UPDATE $tableName SET username = '$username', age = '$age' WHERE id='$id';");
+  }
   
   header("Location: index.php");
 }
