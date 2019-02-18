@@ -17,7 +17,7 @@
     <h1 class="text-center">CRUD example in PHP</h1>
 
     <pre class="text-center"><code>
-      db: crud_php
+      db: db.sqlite
       tables: 
         users: id, username, age
     </code></pre>
@@ -54,7 +54,7 @@
             <legend><b>U</b>pdate user</legend>
             <div class="form-group">
               <label for="id">Id</label>
-              <input type="number" class="form-control" name="id" id="id" placeholder="id">
+              <input type="number" class="form-control" name="id" id="id" placeholder="id" required>
             </div>
             <div class="form-group">
               <label for="username">Username</label>
@@ -122,11 +122,14 @@
         </thead>
         <?php
         // TODO: Replace this with jQuery/AJAX later...
-        $mysqli = new mysqli($host, $dbUsername, $dbPassword, $dbName) or die(mysqli_error($mysqli));
-        $result = $mysqli->query("SELECT * FROM $tableName");
+        // Connect
+        $db = new SQLite3('db.sqlite', SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
+        $results = $db->query("SELECT * FROM $tableName");
+
         ?>
         <?php
-          while($row = $result->fetch_assoc()) {
+        
+          while($row = $results->fetchArray(SQLITE3_ASSOC)) {
             ?>
             <tr>
             <td><?php echo $row['id'] ?></td>
@@ -135,6 +138,8 @@
             </tr>
             <?php
           }
+
+          
         ?>
 
       </table>
