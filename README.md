@@ -1,5 +1,5 @@
 # crud-php-example
-Teaching myself PHP
+Small, crude PHP/sqlite "hello world"-ish project.
 
 Need local mysql with the following: 
 

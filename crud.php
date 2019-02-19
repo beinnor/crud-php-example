@@ -3,7 +3,6 @@
 $dbPath = "db.sqlite";
 $tableName = "users";
 
-
 // Connect
 $db = new SQLite3($dbPath, SQLITE3_OPEN_CREATE | SQLITE3_OPEN_READWRITE);
 
