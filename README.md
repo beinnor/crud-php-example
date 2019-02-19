@@ -1,7 +1,7 @@
 # crud-php-example
 Teaching myself PHP
 
-Need local mysql with the following: 
+Uses sqlite with following:
 
 ```
 db: db.sqlite
